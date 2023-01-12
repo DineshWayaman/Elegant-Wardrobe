@@ -4,6 +4,13 @@ session_start();
 
 include('config.php');
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+require 'vendor/autoload.php';
+$mail = new PHPMailer(true);
+
 
 if(isset($_POST['reguser'])){
     $name = $_POST['name'];
@@ -29,7 +36,32 @@ if(isset($_POST['reguser'])){
         $queryEx->execute(array($name, $email, $password, $user, $city, $address));
     
         if($queryEx){
-            $_SESSION['success_msg'] = "Registration Successfully Completed. You can log in now.";
+
+            $mail->setFrom('system@prudentialhost.com', 'From Clothing Store');
+            $mail->addAddress($email, $name);
+            // $mail->addAddress('ellen@example.com');
+            $mail->addReplyTo('developer@pslship.com', 'Dinesh Wayaman');
+
+            $mail->isHTML(true);                                  //Set email format to HTML
+            $mail->Subject = 'Welcome To Elegant Wardrobe';
+            $mail->Body    = '<!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta http-equiv="X-UA-Compatible" content="IE=edge">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Document</title>
+            </head>
+            <body>
+              <h2 style="text-align: center;">Elegant Wardrobe</h2>
+              <p style="text-align: center;">Your account created sucessfully. This is the confirmation of your account activation.</p>
+              <p style="text-align: center;" ><a href="">Elegant Wardrobe.</a> All right reserved.</p>
+              <p style="text-align: center;">Developed By <a href="https://www.facebook.com/dwayaman">Dinesh Wayaman</a></p>
+            </body>
+            </html>';
+            $mail->send();
+
+            $_SESSION['success_msg'] = "Registration Successfully Completed. We have sent you an email.";
             header('location: index.php');
         }else{
             $_SESSION['error'] = "Error while proccessing. Please try again.";
