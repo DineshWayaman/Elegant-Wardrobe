@@ -32,9 +32,9 @@
 
                 <select name="p_type" id="" class="form-control form-control-user" required>
                     <option type="" id="" disabled selected>Choose Cloth Category</option>
-                    <option type="" id="">Men's</option>
-                    <option type="" id="">Women's</option>
-                    <option type="" id="">Kid's</option>
+                    <option type="" id="">Mens</option>
+                    <option type="" id="">Womens</option>
+                    <option type="" id="">Kids</option>
                 </select>
 
             </div>

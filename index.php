@@ -2,6 +2,14 @@
 session_start();
 include('config.php');
 
+if (isset($_SESSION['u_id'])) {
+    $userID = $_SESSION['u_id'];
+} else {
+    $userID = null;
+}
+
+
+
 include('includes/head.php')
 
 ?>
@@ -11,43 +19,53 @@ include('includes/head.php')
 
 <body>
 
-<?php
-            if (isset($_SESSION['error'])) {
-            ?>
-            <div class="alert alert-danger" role="alert"><?php echo $_SESSION['error'] ?></div>
-            <?php
-            unset($_SESSION['error']);
-            }
-            if (isset($_SESSION['success_msg'])) {
-                ?>
-                <div class="alert alert-success" role="alert"><?php echo $_SESSION['success_msg'] ?></div>
-                <?php
-                unset($_SESSION['success_msg']);
-                # code...
-            }
-        ?>
+
 
 
     <?php
     include('includes/main-nav.php');
 
-    include('includes/slider.php');
 
+
+    ?>
+
+    <?php
+    if (isset($_SESSION['error'])) {
+    ?>
+        <div class="alert alert-danger" role="alert"><?php echo $_SESSION['error'] ?></div>
+    <?php
+        unset($_SESSION['error']);
+    }
+    if (isset($_SESSION['success_msg'])) {
+    ?>
+        <div class="alert alert-success" role="alert"><?php echo $_SESSION['success_msg'] ?></div>
+    <?php
+        unset($_SESSION['success_msg']);
+        # code...
+    }
+    ?>
+
+    <?php
+    include('includes/slider.php');
     ?>
 
 
     <div class="container mt-3">
 
-    <!-- Section 1,2 after slider -->
 
-    <?php include('includes/home/section-one.php');
+
+
+
+        <!-- Section 1,2 after slider -->
+
+        <?php include('includes/home/section-one.php');
         include('includes/home/section-two.php')
-    ?>
+        ?>
 
-    <!--Close Section 1,2 after slider -->
+        <!--Close Section 1,2 after slider -->
 
 
-  
+
 
 
         <div class="row mt-3">
@@ -83,9 +101,9 @@ include('includes/head.php')
 
 
         <!-- Featurd items -->
-       
+
         <?php include('includes/home/featured-items.php');
-               
+
         ?>
 
         <!-- Close Featured items -->

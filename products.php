@@ -1,6 +1,15 @@
 <?php
 session_start();
 
+include('config.php');
+
+if(isset($_SESSION['u_id'])){
+    $userID = $_SESSION['u_id'];
+}else{
+    $userID = null;
+}
+
+
 include('includes/head.php')
 ?>
 
@@ -30,5 +39,7 @@ include('includes/head.php')
 
 
 <?php
-    include('includes/footer.php')
+    include('includes/footer.php');
+    include('includes/home/reg-model.php');
+    include('includes/home/log-model.php');
 ?>
