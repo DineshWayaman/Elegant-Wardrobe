@@ -1,0 +1,9 @@
+Product Add URL - baseurl/admin/add-products.php
+About us - baseurl/about.php
+Login - baseurl
+Registration - baseurl
+Email - Email will sent when user regiter the system
+Add to cart Button will active after user log in to the system
+User login and Registration Buttons will deactivate when user loged in
+Cart page will view after the login
+Total balance will calculate when user add products to Cart

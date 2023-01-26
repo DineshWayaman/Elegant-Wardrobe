@@ -102,7 +102,29 @@ if($userID == null){
 
 </div>
 <div class="col-md-4">
-    <h3 class="text-center">Total Price : Rs. 
+    <h3 class="text-center">Total Price : Rs. <?php
+             $sumOfPrice = 0;
+             $checkUserCart = "SELECT * FROM cart WHERE c_u_id=?";
+             $checkUserEx = $conn->prepare($checkUserCart);
+             $checkUserEx->execute(array($userID));
+             $checkUserRow = $checkUserEx->rowCount();
+             
+             while($checkUserFetch = $checkUserEx->fetch()){
+
+                $itemID = $checkUserFetch['c_p_id'];
+
+                $checkItem = "SELECT * FROM product WHERE p_id =?";
+                $checkItemEx = $conn->prepare($checkItem);
+                $checkItemEx->execute(array($itemID));
+                $checkItemFetch = $checkItemEx->fetch();
+                $itemPrice = $checkItemFetch['p_price'];
+
+                $sumOfPrice = $itemPrice + $sumOfPrice;
+
+
+             }
+
+             echo $sumOfPrice;
  
     ?></h3>
     <div class="text-center">
